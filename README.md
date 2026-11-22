@@ -58,6 +58,35 @@ npm test
 
 ---
 
+## 🌐 Deployment Guide (Render)
+
+### Deploy Backend to Render (Web Service)
+
+1. Push your latest code to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "chore: prepare for Render deployment"
+   git push origin main
+   ```
+2. Log in to [Render Dashboard](https://dashboard.render.com/) and click **New +** > **Web Service**.
+3. Connect your GitHub repository (`Lead-Manager-assigment-`).
+4. Configure the service settings:
+   - **Name:** `lead-manager-api` (or your preferred name)
+   - **Runtime:** `Node`
+   - **Root Directory:** `server` *(Crucial: monorepo subfolder)*
+   - **Build Command:** `npm install && npm run build && npm run seed`
+   - **Start Command:** `npm start`
+   - **Health Check Path:** `/api/health`
+5. Under **Environment Variables**, add:
+   - `NODE_ENV`: `production`
+   - `DATABASE_URL`: `file:./dev.db`
+   - `JWT_SECRET`: *(A secure random string, e.g. `your_long_random_jwt_secret_key`)*
+6. Click **Deploy Web Service**. Once live, your backend will be accessible at `https://lead-manager-api.onrender.com/api/health`.
+
+> **Tip:** You can also deploy in 1 click using Render Blueprints via the included [render.yaml](file:///c:/Users/ashut/Documents/project/Lead-Manager-assigment-/render.yaml).
+
+---
+
 ## 🛠 Tech Stack & Decisions
 
 ### **Frontend**
