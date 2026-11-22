@@ -1,6 +1,6 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL
-  ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '')}/api`
-  : '/api';
+const rawBase = (import.meta.env.VITE_API_BASE_URL || '').trim();
+const cleanBase = rawBase.replace(/\/+$/, '').replace(/\/api$/, '');
+const API_BASE = cleanBase ? `${cleanBase}/api` : '/api';
 
 /**
  * Helper to get auth headers with JWT token if available
